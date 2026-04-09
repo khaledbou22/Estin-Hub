@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 244 94% 68%;
+    --primary-foreground: 0 0% 100%;
+    --primary-dark: 244 68% 51%;
+    --primary-light: 226 100% 97%;
+    --secondary: 174 58% 55%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 244 94% 68%;
+    --radius: 0.75rem;
+    --text-secondary: 215 16% 47%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 240 20% 6%;
+    --foreground: 210 40% 98%;
+    --card: 240 17% 14%;
+    --card-foreground: 210 40% 98%;
+    --popover: 240 17% 14%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 244 94% 68%;
+    --primary-foreground: 0 0% 100%;
+    --primary-dark: 244 68% 51%;
+    --primary-light: 226 100% 97%;
+    --secondary: 174 58% 55%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 240 12% 20%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 240 12% 20%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    --border: 240 12% 22%;
+    --input: 240 12% 22%;
+    --ring: 244 94% 68%;
+    --text-secondary: 215 16% 47%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+@layer components {
+  .auth-input {
+    @apply h-[52px] w-full rounded-xl border-[1.5px] border-input bg-background px-4 pl-11 text-[15px] text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none;
+  }
+  .auth-input:focus {
+    @apply border-primary ring-[3px] ring-primary/15;
+  }
+  .auth-input-error {
+    @apply border-destructive ring-[3px] ring-destructive/10;
+  }
+  .auth-label {
+    @apply text-sm font-medium text-foreground/80;
+  }
+  .auth-btn {
+    @apply h-[52px] w-full rounded-xl bg-gradient-to-br from-primary to-[hsl(var(--primary-dark))] text-primary-foreground text-base font-semibold transition-all duration-200 cursor-pointer border-none;
+  }
+  .auth-btn:hover {
+    @apply -translate-y-px shadow-[0_8px_25px_hsl(var(--primary)/0.4)];
+  }
+  .auth-btn:active {
+    @apply translate-y-0;
+  }
+  .auth-btn:disabled {
+    @apply opacity-80 cursor-not-allowed translate-y-0 shadow-none;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(15px, -20px); }
+  66% { transform: translate(-10px, 15px); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-float-1 { animation: float 8s ease-in-out infinite; }
+.animate-float-2 { animation: float 12s ease-in-out infinite; }
+.animate-float-3 { animation: float 10s ease-in-out infinite; }
+.animate-fade-in-up { animation: fadeInUp 0.5s ease-out; }
