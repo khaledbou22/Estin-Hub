@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
+  CheckCircle2,
   Eye,
   EyeOff,
   Loader2,
@@ -9,12 +10,12 @@ import {
   Mail,
   ShieldCheck,
   User,
+  XCircle,
 } from "lucide-react";
 import BrandPanel from "@/components/auth/BrandPanel";
 import { AUTH_KEY, setAccountPassword, setStoredUser } from "@/lib/user-storage";
 import MobileHeader from "@/components/auth/MobileHeader";
 import DarkModeToggle from "@/components/auth/DarkModeToggle";
-import PasswordStrength from "@/components/auth/PasswordStrength";
 
 type FormErrors = Partial<
   Record<
@@ -22,6 +23,37 @@ type FormErrors = Partial<
     string
   >
 >;
+
+function validatePassword(password: string) {
+  const minLength = password.length >= 8;
+  const hasUpper = /[A-Z]/.test(password);
+  const hasLower = /[a-z]/.test(password);
+  const hasNumber = /[0-9]/.test(password);
+  const hasSpecial = /[^A-Za-z0-9]/.test(password);
+  return {
+    minLength,
+    hasUpper,
+    hasLower,
+    hasNumber,
+    hasSpecial,
+    get isValid() {
+      return this.minLength && this.hasUpper && this.hasLower && this.hasNumber && this.hasSpecial;
+    },
+  };
+}
+
+function getStrength(password: string) {
+  const v = validatePassword(password);
+  let score = 0;
+  if (v.minLength) score++;
+  if (v.hasUpper) score++;
+  if (v.hasNumber) score++;
+  if (v.hasSpecial) score++;
+  if (score <= 1) return { level: 1, label: "Weak", color: "#EF4444" };
+  if (score === 2) return { level: 2, label: "Fair", color: "#F97316" };
+  if (score === 3) return { level: 3, label: "Good", color: "#EAB308" };
+  return { level: 4, label: "Strong", color: "#22C55E" };
+}
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -67,6 +99,10 @@ const SignUpPage = () => {
 
     if (formData.password.length < 8) {
       setError("password", "Password must be at least 8 characters");
+      return;
+    }
+
+    if (!validatePassword(formData.password).isValid) {
       return;
     }
 
@@ -177,6 +213,11 @@ const SignUpPage = () => {
                     type={showPw ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    onCopy={(e) => e.preventDefault()}
+                    onPaste={(e) => e.preventDefault()}
+                    onCut={(e) => e.preventDefault()}
+                    onContextMenu={(e) => e.preventDefault()}
+                    autoComplete="new-password"
                     placeholder="••••••••"
                     className={`auth-input !pr-11 ${
                       errors.password ? "auth-input-error" : ""
@@ -190,12 +231,60 @@ const SignUpPage = () => {
                     {showPw ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
                 </div>
-                <PasswordStrength password={password} />
                 {errors.password && (
                   <p className="mt-1.5 text-xs text-destructive">{errors.password}</p>
                 )}
+                {/* Strength bar */}
+                {password ? (() => {
+                  const s = getStrength(password);
+                  return (
+                    <div className="mt-2">
+                      <div className="flex gap-1">
+                        {[1, 2, 3, 4].map((seg) => (
+                          <div
+                            key={seg}
+                            className="h-[4px] flex-1 rounded-full"
+                            style={{
+                              backgroundColor: seg <= s.level ? s.color : "#E2E8F0",
+                              transition: "background-color 0.3s ease",
+                            }}
+                          />
+                        ))}
+                      </div>
+                      <p className="mt-1.5 text-right text-[12px] font-medium" style={{ color: s.color }}>
+                        {s.label}
+                      </p>
+                    </div>
+                  );
+                })() : null}
+                {/* Requirements checklist */}
+                {password ? (() => {
+                  const v = validatePassword(password);
+                  const items: [boolean, string][] = [
+                    [v.minLength, "At least 8 characters"],
+                    [v.hasUpper, "One uppercase letter (A-Z)"],
+                    [v.hasLower, "One lowercase letter (a-z)"],
+                    [v.hasNumber, "One number (0-9)"],
+                    [v.hasSpecial, "One special character (!@#$%...)"],
+                  ];
+                  return (
+                    <div style={{ background: "#F8F9FC", border: "1px solid #E8ECEF", borderRadius: 10, padding: "12px 16px", marginTop: 8, display: "flex", flexDirection: "column", gap: 7 }}>
+                      {items.map(([met, label]) => (
+                        <div key={label} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, transition: "color 0.2s ease" }}>
+                          <span style={{ display: "inline-flex", transform: met ? "scale(1)" : "scale(0.8)", transition: "transform 0.2s ease" }}>
+                            {met
+                              ? <CheckCircle2 size={15} style={{ color: "#22C55E" }} />
+                              : <XCircle size={15} style={{ color: "#EF4444" }} />}
+                          </span>
+                          <span style={{ color: met ? "#22C55E" : "#94A3B8", fontWeight: met ? 500 : 400, transition: "color 0.2s ease" }}>
+                            {label}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  );
+                })() : null}
               </div>
-
               <div>
                 <label className="auth-label mb-1.5 block">Confirm Password</label>
                 <div className="relative">
@@ -207,6 +296,11 @@ const SignUpPage = () => {
                     type={showConfirm ? "text" : "password"}
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
+                    onCopy={(e) => e.preventDefault()}
+                    onPaste={(e) => e.preventDefault()}
+                    onCut={(e) => e.preventDefault()}
+                    onContextMenu={(e) => e.preventDefault()}
+                    autoComplete="new-password"
                     placeholder="••••••••"
                     className={`auth-input !pr-11 ${
                       errors.confirmPassword ? "auth-input-error" : ""
@@ -251,11 +345,16 @@ const SignUpPage = () => {
 
               <button
                 type="button"
-                disabled={isLoading}
+                disabled={isLoading || !validatePassword(password).isValid}
                 onClick={onSubmit}
-                className="auth-btn mt-1 flex items-center justify-center gap-2"
-              >
-                {isLoading ? (
+                className="mt-1 flex h-[52px] w-full items-center justify-center gap-2 rounded-xl text-base font-semibold text-white"
+                style={{
+                  background: validatePassword(password).isValid ? "linear-gradient(135deg, #6C63FF, #4338CA)" : "#94A3B8",
+                  opacity: validatePassword(password).isValid ? 1 : 0.5,
+                  cursor: validatePassword(password).isValid ? "pointer" : "not-allowed",
+                  transition: "all 0.3s ease",
+                }}
+              >                {isLoading ? (
                   <>
                     <Loader2 size={18} className="animate-spin" /> Creating account...
                   </>
