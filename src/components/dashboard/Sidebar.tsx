@@ -2,7 +2,6 @@ import { NavLink, useNavigate } from "react-router-dom";
 import {
   Briefcase,
   Car,
-  GraduationCap,
   Home,
   LogOut,
   MessageSquareText,
@@ -48,9 +47,7 @@ export function Sidebar() {
     <aside className="hidden w-[220px] flex-col border-r border-[#E8ECEF] bg-white dark:border-[#232323] dark:bg-[#090909] lg:flex">
       <div className="border-b border-[#E8ECEF] px-4 py-6 dark:border-[#232323]">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#EEF2FF] text-[#6C63FF]">
-            <GraduationCap className="h-5 w-5" />
-          </div>
+          <img src="/logo.png" alt="Estin Hub" className="h-9 w-9 rounded-full object-contain" />
           <div className="flex flex-col">
             <span className="text-lg font-extrabold text-[#0F172A] dark:text-[#F8FAFC]">ESTIN Hub</span>
             <span className="text-[11px] text-[#94A3B8] dark:text-[#94A3B8]">Campus Ecosystem</span>

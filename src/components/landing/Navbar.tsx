@@ -36,14 +36,11 @@ const Navbar = () => {
       <nav className="container mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 group">
-          <motion.div
-            whileHover={{ rotate: 5, scale: 1.08 }}
-            transition={{ type: "spring", stiffness: 400, damping: 20 }}
-            className="w-9 h-9 rounded-xl flex items-center justify-center"
-            style={{ background: "var(--gradient-primary)", boxShadow: "var(--shadow-blue)" }}
-          >
-            <span className="text-[11px] font-black text-white">ES</span>
-          </motion.div>
+          <img
+            src="/logo.png"
+            alt="Estin Hub"
+            className="w-9 h-9 rounded-xl object-contain"
+          />
           <span className="text-base font-bold text-foreground group-hover:text-primary transition-colors duration-200">
             ESTIN Hub
           </span>

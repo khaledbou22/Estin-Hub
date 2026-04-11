@@ -26,9 +26,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="col-span-2 sm:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-8 h-8 rounded-xl bg-gradient-primary shadow-blue flex items-center justify-center">
-                <span className="text-xs font-black text-primary-foreground">ES</span>
-              </div>
+              <img src="/logo.png" alt="Estin Hub" className="w-8 h-8 rounded-xl object-contain" />
               <span className="text-base font-bold">ESTIN Hub</span>
             </div>
             <p className="text-sm text-background/60 leading-relaxed max-w-xs">

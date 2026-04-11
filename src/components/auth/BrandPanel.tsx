@@ -72,7 +72,7 @@ const BrandPanel = () => (
       to="/"
       className="relative z-10 flex items-center gap-2 no-underline hover:opacity-95"
     >
-      <span className="text-xl">🎓</span>
+      <img src="/logo.png" alt="Estin Hub" className="h-9 w-9 rounded-full object-contain" />
       <span className="text-xl font-bold text-white">ESTIN Hub</span>
     </Link>
 

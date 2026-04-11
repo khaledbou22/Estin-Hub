@@ -143,12 +143,7 @@ const PreviewSection = () => {
                   {/* App header */}
                   <div className="flex items-center justify-between px-4 py-3.5 border-b border-border/60 bg-surface-1">
                     <div className="flex items-center gap-2.5">
-                      <div
-                        className="w-8 h-8 rounded-xl flex items-center justify-center"
-                        style={{ background: "var(--gradient-primary)", boxShadow: "var(--shadow-blue)" }}
-                      >
-                        <span className="text-[11px] font-black text-white">ES</span>
-                      </div>
+                      <img src="/logo.png" alt="Estin Hub" className="w-8 h-8 rounded-xl object-contain" />
                       <span className="text-sm font-bold text-foreground">ESTIN Hub</span>
                     </div>
                     <div className="flex items-center gap-2">

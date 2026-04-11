@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { GraduationCap, LogOut, Settings, User } from "lucide-react";
+import { LogOut, Settings, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -68,9 +68,7 @@ export function Navbar() {
           to="/dashboard"
           className="mr-2 flex items-center gap-2 flex-shrink-0 lg:hidden"
         >
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#EEF2FF] text-[#6C63FF]">
-            <GraduationCap className="h-4 w-4" />
-          </div>
+          <img src="/logo.png" alt="Estin Hub" className="h-8 w-8 rounded-full object-contain" />
           <span className="font-semibold text-sm">ESTIN</span>
         </Link>
 

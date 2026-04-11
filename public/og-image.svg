@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0F172A"/>
+      <stop offset="100%" style="stop-color:#1E1B4B"/>
+    </linearGradient>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00C9FF"/>
+      <stop offset="50%" style="stop-color:#4A90E2"/>
+      <stop offset="100%" style="stop-color:#00E676"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6C63FF"/>
+      <stop offset="100%" style="stop-color:#00E676"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Subtle grid dots -->
+  <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+    <circle cx="2" cy="2" r="1.5" fill="rgba(255,255,255,0.06)"/>
+  </pattern>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+
+  <!-- Glow orb top-right -->
+  <circle cx="1050" cy="120" r="280" fill="rgba(108,99,255,0.12)"/>
+  <!-- Glow orb bottom-left -->
+  <circle cx="150" cy="520" r="200" fill="rgba(0,230,118,0.08)"/>
+
+  <!-- Logo circle icon -->
+  <circle cx="600" cy="200" r="72" fill="url(#logoGrad)"/>
+  <path d="M600 140 C575 140, 555 158, 555 178 C555 190, 562 198, 572 202 L582 205 C590 207, 595 212, 595 220 C595 232, 585 240, 572 240 L628 240 C642 240, 645 230, 645 224 C645 212, 638 204, 628 200 L618 197 C610 195, 605 190, 605 182 C605 170, 615 162, 628 162 Z" fill="rgba(15,23,42,0.5)"/>
+
+  <!-- ESTIN HUB text -->
+  <text x="600" y="318" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="900" fill="white" text-anchor="middle" letter-spacing="-1">ESTIN HUB</text>
+
+  <!-- Accent underline -->
+  <rect x="380" y="332" width="440" height="4" rx="2" fill="url(#accent)"/>
+
+  <!-- Subtitle -->
+  <text x="600" y="400" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="400" fill="rgba(255,255,255,0.65)" text-anchor="middle">The Smart Student Platform for ESTIN University</text>
+
+  <!-- Bottom badges -->
+  <rect x="330" y="460" width="160" height="44" rx="22" fill="rgba(108,99,255,0.25)" stroke="rgba(108,99,255,0.5)" stroke-width="1"/>
+  <text x="410" y="488" font-family="system-ui, sans-serif" font-size="16" fill="rgba(255,255,255,0.85)" text-anchor="middle">Services</text>
+
+  <rect x="510" y="460" width="180" height="44" rx="22" fill="rgba(0,230,118,0.15)" stroke="rgba(0,230,118,0.4)" stroke-width="1"/>
+  <text x="600" y="488" font-family="system-ui, sans-serif" font-size="16" fill="rgba(255,255,255,0.85)" text-anchor="middle">Marketplace</text>
+
+  <rect x="710" y="460" width="160" height="44" rx="22" fill="rgba(234,88,12,0.2)" stroke="rgba(234,88,12,0.4)" stroke-width="1"/>
+  <text x="790" y="488" font-family="system-ui, sans-serif" font-size="16" fill="rgba(255,255,255,0.85)" text-anchor="middle">Transport</text>
+
+  <!-- URL -->
+  <text x="600" y="580" font-family="system-ui, sans-serif" font-size="18" fill="rgba(255,255,255,0.35)" text-anchor="middle">estin-hub.vercel.app</text>
+</svg>

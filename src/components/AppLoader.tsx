@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { GraduationCap } from "lucide-react";
 
 export function AppLoader({ onDone }: { onDone: () => void }) {
   const [fading, setFading] = useState(false);
@@ -20,9 +19,7 @@ export function AppLoader({ onDone }: { onDone: () => void }) {
       }}
     >
       <div className="flex items-center gap-3 mb-6">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#EEF2FF] text-[#6C63FF]">
-          <GraduationCap className="h-6 w-6" />
-        </div>
+        <img src="/logo.png" alt="Estin Hub" className="h-10 w-10 rounded-full object-contain" />
         <span className="text-[24px] font-extrabold text-[#0F172A] dark:text-[#F8FAFC]">
           ESTIN Hub
         </span>
