@@ -19,18 +19,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Set up the listener FIRST so it catches the SIGNED_IN event
-    // fired when Supabase processes the token from the URL hash (email verification link)
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, newSession) => {
+    // Listen FIRST — catches SIGNED_IN and PASSWORD_RECOVERY from URL hash
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, newSession) => {
       setSession(newSession);
+
       if (newSession) {
         localStorage.setItem("estin_auth", "true");
       } else {
         localStorage.removeItem("estin_auth");
       }
+
+      // Route based on event type
+      if (event === "PASSWORD_RECOVERY") {
+        // Forgot password link clicked → go to reset password page
+        window.location.replace("/reset-password");
+      } else if (event === "SIGNED_IN") {
+        // Email verification link clicked → go to dashboard
+        // Only redirect if we're on the callback page (not on a normal login)
+        const path = window.location.pathname;
+        if (path === "/auth/callback") {
+          window.location.replace("/dashboard");
+        }
+      }
     });
 
-    // Then get the initial session (handles normal page loads)
+    // Get initial session
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session);
       setLoading(false);
