@@ -33,7 +33,7 @@ export function Sidebar() {
   async function handleSignOut() {
     await supabase.auth.signOut();
     localStorage.clear();
-    navigate("/");
+    navigate("/login");
   }
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
