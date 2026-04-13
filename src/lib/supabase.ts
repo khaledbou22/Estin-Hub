@@ -1,0 +1,14 @@
+import { createClient } from "@supabase/supabase-js";
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.error(
+    "[Supabase] Missing environment variables.\n" +
+    "Make sure VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY are set in .env.local\n" +
+    "The ANON KEY must be the JWT token from Supabase Dashboard → Settings → API (starts with eyJ...)"
+  );
+}
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);

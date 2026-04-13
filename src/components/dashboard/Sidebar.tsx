@@ -11,7 +11,7 @@ import {
   User,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { clearSession } from "@/lib/user-storage";
+import { supabase } from "@/lib/supabase";
 
 const mainNavItems = [
   { href: "/dashboard", label: "Home", icon: Home, end: true },
@@ -30,8 +30,9 @@ const userNavItems = [
 export function Sidebar() {
   const navigate = useNavigate();
 
-  function handleSignOut() {
-    clearSession();
+  async function handleSignOut() {
+    await supabase.auth.signOut();
+    localStorage.clear();
     navigate("/");
   }
 
