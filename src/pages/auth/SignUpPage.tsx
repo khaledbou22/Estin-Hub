@@ -64,7 +64,7 @@ const SignUpPage = () => {
       email: trimmedEmail,
       password,
       options: {
-        emailRedirectTo: `${window.location.origin}/dashboard`,
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
         data: {
           full_name: fullName.trim(),
           display_name: fullName.trim().split(" ")[0],

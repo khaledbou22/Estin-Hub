@@ -16,6 +16,7 @@ import PublicProfilePage from "./pages/dashboard/PublicProfilePage";
 import SettingsPage from "./pages/SettingsPage";
 import PostDetailPage from "./pages/PostDetailPage";
 import CheckEmailPage from "./pages/auth/CheckEmailPage";
+import AuthCallbackPage from "./pages/auth/AuthCallbackPage";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/auth/ResetPasswordPage";
 import TermsPage from "./pages/TermsPage";
@@ -38,6 +39,7 @@ function AppRoutes() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/check-email" element={<CheckEmailPage />} />
+        <Route path="/auth/callback" element={<AuthCallbackPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route path="/terms" element={<TermsPage />} />
