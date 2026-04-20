@@ -60,7 +60,7 @@ const SignUpPage = () => {
 
     setIsLoading(true);
     const trimmedEmail = email.trim().toLowerCase();
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email: trimmedEmail,
       password,
       options: {
@@ -71,6 +71,13 @@ const SignUpPage = () => {
         },
       },
     });
+
+    if (data?.user && data.user.identities?.length === 0) {
+      setError("email", "This email is already registered. Please sign in instead.");
+      setIsLoading(false);
+      return;
+    }
+
     setIsLoading(false);
 
     if (error) { setSubmitError(error.message); return; }
@@ -111,7 +118,26 @@ const SignUpPage = () => {
                     <Mail size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="yourname@estin.dz" className={`auth-input ${errors.email ? "auth-input-error" : ""}`} />
                   </div>
-                  {errors.email && <p className="mt-1.5 text-xs text-destructive">{errors.email}</p>}
+                  {errors.email && (
+                    errors.email === "This email is already registered. Please sign in instead." ? (
+                      <p className="mt-1.5" style={{ fontSize: 13, color: "#EF4444" }}>
+                        This account already exists. Please sign in instead. {" "}
+                        <span
+                          role="button"
+                          tabIndex={0}
+                          style={{ color: "#6C63FF", fontWeight: 600, cursor: "pointer" }}
+                          onClick={() => navigate("/login")}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") navigate("/login");
+                          }}
+                        >
+                          → Sign in
+                        </span>
+                      </p>
+                    ) : (
+                      <p className="mt-1.5 text-xs text-destructive">{errors.email}</p>
+                    )
+                  )}
                 </div>
 
                 {/* Password */}
